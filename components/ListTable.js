@@ -10,7 +10,7 @@ let ListTable = ({ listState, listSetter }) => {
 
   return (
 
-    <ScrollView style={{ marginBottom: 40 }}>
+    
 
       <FlatList
         data={listState.list}
@@ -20,7 +20,7 @@ let ListTable = ({ listState, listSetter }) => {
         }}
       />
 
-    </ScrollView>
+   
 
   )
 }
