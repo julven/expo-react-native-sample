@@ -38,7 +38,7 @@ let Index = ({ accountState }) => {
        
        { Platform.OS === "android" &&
           
-         <View style={[ {height: "auto", marginTop: StatusBar.currentHeight, borderTopColor: "gray", borderBottomWidth: 2}]}>
+         <View style={[ {height: "auto", borderTopColor: "gray", borderBottomWidth: 2}]}>
          <StatusBar backgroundColor={"lightgray"}/>
           <Navbar/>
         </View>}
