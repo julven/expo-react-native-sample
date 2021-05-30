@@ -5,20 +5,20 @@ let GlobalContext = createContext();
 
 let GlobalProvider = ({ children }) => {
 
-	// let randColor = () => "hsl(" + Math.random() * 360 + ", 60%, 65%)";
+  // let randColor = () => "hsl(" + Math.random() * 360 + ", 60%, 65%)";
+  
+  let randColor = () => "white";
 
-	let randColor = () => "white";
+	let fieldChange = ( field, value, state, setter ) => {
 
-	let fieldChange = (field, value, state, setter) => {
-
-		return setter({ ...state, [field]: value })
+		return setter({ ...state, [ field ] : value })
 	}
 
 	let capitalize = value => {
 
 		let newValue = [];
 
-		value.split(" ").forEach(x => {
+		value.split(" ").forEach( x => {
 			newValue.push(x.charAt(0).toUpperCase() + x.slice(1));
 		})
 
@@ -26,14 +26,14 @@ let GlobalProvider = ({ children }) => {
 		return newValue.join(" ");
 	}
 
-	let date = value => moment(value).format("MMM D, YYYY")
+	let date = value => moment(value).format("MMM D, YYYY") 
 
 	return (
-		<GlobalContext.Provider value={{ fieldChange, capitalize, date, randColor }}>
-			{ children}
+		<GlobalContext.Provider value={{fieldChange, capitalize, date, randColor}}>
+			{ children }
 		</GlobalContext.Provider>
 
 	)
 }
 
-export { GlobalContext, GlobalProvider }
+export {GlobalContext, GlobalProvider}
