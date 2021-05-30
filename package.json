@@ -15,12 +15,14 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-41.0.0.tar.gz",
     "react-native-web": "~0.13.12",
     "redux": "4.1.0",
+    "moment": "latest",
     "react-redux": "7.2.4",
     "expo-constants": "~10.1.3",
     "react-native-paper": "3.6.0",
     "react-router-native": "latest",
-    "@react-native-community/datetimepicker": "3.2.0",
-    "moment": "latest"
+    "expo-screen-orientation": "~3.1.0",
+    "react-native-orientation-locker": "1.3.1",
+    "@react-native-community/datetimepicker": "3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
