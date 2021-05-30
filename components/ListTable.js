@@ -6,22 +6,16 @@ import Table from './Table'
 
 let ListTable = ({ listState, listSetter }) => {
 
-
-
   return (
+    <FlatList
+      data={listState.list}
+      renderItem={({ item }) => <Table x={item} />}
+      contentContainerStyle={{
+        paddingTop: 10,
+        paddingBottom: 60
 
-    
-
-      <FlatList
-        data={listState.list}
-        renderItem={({ item }) => <Table x={item} />}
-        contentContainerStyle={{
-          marginVertical: 10
-        }}
-      />
-
-   
-
+      }}
+    />
   )
 }
 

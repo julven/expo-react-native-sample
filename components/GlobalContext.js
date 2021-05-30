@@ -5,11 +5,13 @@ let GlobalContext = createContext();
 
 let GlobalProvider = ({ children }) => {
 
-	let randColor = () => "hsl(" + Math.random() * 360 + ", 60%, 65%)";
+	// let randColor = () => "hsl(" + Math.random() * 360 + ", 60%, 65%)";
 
-	let fieldChange = (field, value, state) => {
+	let randColor = () => "white";
 
-		return { ...state, [field]: value }
+	let fieldChange = (field, value, state, setter) => {
+
+		return setter({ ...state, [field]: value })
 	}
 
 	let capitalize = value => {

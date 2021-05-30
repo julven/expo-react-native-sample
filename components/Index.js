@@ -1,20 +1,25 @@
 import React, { useState, useEffect, useRef, useContext } from 'react';
 import { Button, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View, Dimensions, ScrollView, Alert, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import { AndroidBackButton, BackButton, DeepLinking, Link, MemoryRouter, NativeRouter, Prompt, Redirect, Route, Router, StaticRouter, Switch, generatePath, matchPath, useHistory, useLocation, useParams, useRouteMatch, withRouter } from 'react-router-native'
+// import Orientation, { OrientationLocker, PORTRAIT } from 'react-native-orientation-locker'
+import { OrientationLock, lockAsync } from 'expo-screen-orientation'
 import Navbar from './Navbar';
 import Home from './Home';
 import List from './List';
 import Account from './Account';
+import Login from './Login';
 import { GlobalContext } from './GlobalContext'
+import { withConnect } from './Redux'
 
-let Index = () => {
+let Index = ({ accountState }) => {
 
   let context = useContext(GlobalContext)
-
+  let [test, setTest] = useState("");
   let [layout, setLayout] = useState(null)
 
   useEffect(() => {
-
+    setTest(JSON.stringify())
+    lockAsync(OrientationLock.PORTRAIT)
   }, [])
 
   const style = StyleSheet.create({
@@ -33,21 +38,26 @@ let Index = () => {
 
         {Platform.OS === "android" &&
 
-          <View style={[{ height: "auto", marginTop: StatusBar.currentHeight }]}>
+          <View style={[{ height: "auto", marginTop: StatusBar.currentHeight, borderTopColor: "gray", borderBottomWidth: 2 }]}>
+            <StatusBar backgroundColor={"lightgray"} />
             <Navbar />
           </View>}
-        <View style={[style.view1, { flexGrow: 1, paddingHorizontal: 10 }]} onLayout={e => setLayout(e.nativeEvent.layout.height)}>
+        {accountState.logged ?
+          <View style={[style.view1, { flexGrow: 1 }]} onLayout={e => setLayout(e.nativeEvent.layout.height)}>
+            <Route exact path="/" render={() => <Home />} />
+            <Route exact path="/list" render={() => <List />} />
+            <Route exact path="/account" component={Account} />
+            <Text>{test}</Text>
+          </View>
+          :
+          <Login />
+        }
 
-          <Route exact path="/" component={Home} />
-          <Route exact path="/list" render={() => <List />} />
-          <Route exact path="/account" component={Account} />
-
-
-        </View>
         {Platform.OS === "ios" &&
-          <View style={[{ height: "auto" }]}>
+          <View style={[{ height: "auto", borderTopColor: "gray", borderTopWidth: 2 }]}>
             <Navbar />
-          </View>}
+          </View>
+        }
 
       </SafeAreaView >
     </TouchableWithoutFeedback>
@@ -58,4 +68,4 @@ let Index = () => {
 
 
 
-export default withRouter(Index)
+export default withConnect(withRouter(Index))

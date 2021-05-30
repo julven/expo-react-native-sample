@@ -4,12 +4,9 @@ import { globalStyle } from './GlobalStyle'
 import { withConnect } from './Redux'
 import { GlobalContext } from './GlobalContext'
 
-
 let Table = ({ listSetter, listState, x }) => {
 
   let context = useContext(GlobalContext)
-
-  let randColor = () => "hsl(" + Math.random() * 360 + ", 100%, 75%)";
 
   let deletes = id => {
     listSetter.listDelete({ id })
@@ -17,7 +14,7 @@ let Table = ({ listSetter, listState, x }) => {
 
   return (
     <TouchableWithoutFeedback onPress={() => { }}>
-      <View style={{ backgroundColor: randColor(), marginTop: 5, marginLeft: 5, marginRight: 10, padding: 5, flex: 1, flexDirection: "row" }}>
+      <View style={[style.table, globalStyle.bordered, { maxWidth: 340, minWidth: 330, alignSelf: "center" }]}>
         <View style={{ flexGrow: 1 }}>
           <View style={{ flexDirection: "row", }}>
             <View style={{ justifyContent: "flex-end" }}>
@@ -50,9 +47,9 @@ let Table = ({ listSetter, listState, x }) => {
 
         <View style={{ flexShrink: 1 }}>
           <TouchableHighlight
-            underlayColor={randColor()}
+            underlayColor={context.randColor()}
             onPress={() => deletes(x.id)}
-            style={{ backgroundColor: "white", borderColor: "lightgray", borderWidth: 2 }}>
+            style={{ backgroundColor: "lightgray", borderColor: "gray", borderWidth: 2 }}>
             <Text style={{ marginHorizontal: 5 }}>delete</Text>
           </TouchableHighlight>
         </View>
@@ -63,3 +60,7 @@ let Table = ({ listSetter, listState, x }) => {
 }
 
 export default withConnect(Table)
+
+const style = StyleSheet.create({
+  table: { backgroundColor: "white", marginTop: 5, marginLeft: 5, marginRight: 10, padding: 5, flex: 1, flexDirection: "row" }
+})

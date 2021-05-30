@@ -1,12 +1,14 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Platform, SafeAreaView, StatusBar, StyleSheet, Text, View, TextInput, TouchableHighlight, Alert, Modal } from 'react-native';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment'
 import { withConnect } from './Redux'
 import { globalStyle } from './GlobalStyle'
+import { GlobalContext } from './GlobalContext'
 
 let ListForm = ({ listSetter }) => {
 
+  let context = useContext(GlobalContext)
   let [test, setTest] = useState("")
   let [form, setForm] = useState({
     fname: "",
@@ -79,7 +81,7 @@ let ListForm = ({ listSetter }) => {
 
         <Text style={{ marginTop: 5 }}>Birthday {form.bday == "" && <Text style={{ color: "red" }}>required*</Text>}</Text>
         <View style={{ flexDirection: "row", alignItems: "center" }}>
-          <TextInput style={[globalStyle.input, { width: 160, }]} value={form.bday || "yyyy-mm-dd"} />
+          <TextInput style={[globalStyle.input, { width: 160, }]} value={context.date(form.bday)} />
 
           <View style={{ marginHorizontal: 30, borderWidth: 2, borderColor: "gray", backgroundColor: "lightgray" }}>
             <TouchableHighlight underlayColor={randColor()} activeOpacity={0.6} onPress={() => setDate({ ...date, show: true })}>
@@ -90,10 +92,10 @@ let ListForm = ({ listSetter }) => {
           {
             Platform.OS === "ios" ?
               <Modal visible={date.show}>
-                <View style={{ flex: 1, justifyContent: "center", backgroundColor: "hsl(" + Math.random() * 360 + ", 100%, 75%)" }}>
+                <View style={{ flex: 1, justifyContent: "center", backgroundColor: context.randColor() }}>
                   <DateTimePicker
                     onChange={(e, date) => formHandler("bday", moment(date).format("YYYY-MM-DD"))}
-                    value={new Date(form.bday)}
+                    value={new Date(moment(form.bday).add(24, "hours").format("YYYY-MM-DD"))}
                     display="spinner" />
                   <View style={{ marginHorizontal: 30, borderWidth: 2, borderColor: "gray", backgroundColor: "lightgray" }}>
                     <TouchableHighlight underlayColor={"white"} activeOpacity={0.6} onPress={() => setDate({ ...date, show: false })}>
@@ -103,10 +105,12 @@ let ListForm = ({ listSetter }) => {
                 </View>
               </Modal>
               :
-              date.show && <DateTimePicker value={new Date(form.bday)} onChange={(e, date) => {
-                setDate({ ...date, show: false });
-                formHandler("bday", moment(date).format("YYYY-MM-DD"))
-              }} />
+              date.show &&
+              <DateTimePicker
+                value={new Date(moment(form.bday).add(24, "hours").format("YYYY-MM-DD"))}
+                onChange={(e, date) => {
+                  setDate({ ...date, show: false }); formHandler("bday", moment(date).format("YYYY-MM-DD"))
+                }} />
           }
 
         </View>

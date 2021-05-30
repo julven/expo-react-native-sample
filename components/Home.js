@@ -39,9 +39,9 @@ let Home = ({ listState, accountState }) => {
 
   }, [])
   return (
-    <View>
-      <Text style={[globalStyle.title]}>Home</Text>
-      <View style={{ backgroundColor: context.randColor(), marginTop: 5 }}>
+    <View style={{ minWidth: 335, maxWidth: 340, alignSelf: "center" }}>
+      <Text style={[globalStyle.title,]}>Home</Text>
+      <View style={[{ backgroundColor: "lightgray", marginTop: 5 }, globalStyle.bordered]}>
         <View style={{ margin: 5 }}>
           <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>List Summary</Text>
           <View style={{ flexDirection: "row", maxWidth: 100, justifyContent: "space-between" }}>
@@ -61,7 +61,7 @@ let Home = ({ listState, accountState }) => {
         </View>
       </View>
 
-      <View style={{ backgroundColor: context.randColor(), marginTop: 5 }}>
+      <View style={[{ backgroundColor: "lightgray", marginTop: 5 }, globalStyle.bordered]}>
         <View style={{ margin: 5 }}>
           <Text style={{ fontSize: 16, fontWeight: "bold", marginBottom: 5 }}>Account Information</Text>
           <View style={{ flexDirection: "row" }}>
