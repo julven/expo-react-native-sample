@@ -23,19 +23,22 @@ let AccountImage = ({ accountState, accountSetter }) => {
           setShowModal(false)
           return;
         }
+
+        let result = await imagePicker.launchImageLibraryAsync({
+          mediaTypes: imagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1,
+        });
+        if (!result.cancelled) {
+          accountSetter.accountSet({ image: result.uri })
+          setShowModal(false)
+        }
+
       }
     })()
 
-    let result = await imagePicker.launchImageLibraryAsync({
-      mediaTypes: imagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    });
-    if (!result.cancelled) {
-      accountSetter.accountSet({ image: result.uri })
-      setShowModal(false)
-    }
+   
 
   }
 
@@ -49,20 +52,24 @@ let AccountImage = ({ accountState, accountSetter }) => {
           setShowModal(false)
           return;
         }
+
+        let result = await imagePicker.launchCameraAsync({
+          mediaTypes: imagePicker.MediaTypeOptions.Images,
+          allowsEditing: true,
+          aspect: [1, 1],
+          quality: 1,
+        })
+    
+        if (!result.cancelled) {
+          accountSetter.accountSet({ image: result.uri })
+          setShowModal(false)
+        }
+
+
       }
     })()
 
-    let result = await imagePicker.launchCameraAsync({
-      mediaTypes: imagePicker.MediaTypeOptions.Images,
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 1,
-    })
-
-    if (!result.cancelled) {
-      accountSetter.accountSet({ image: result.uri })
-      setShowModal(false)
-    }
+   
   }
 
   return (
