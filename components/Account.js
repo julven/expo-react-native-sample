@@ -122,14 +122,14 @@ let Account = ({accountState, accountSetter}) => {
               <View style={[style.radioGroup]}>
                 <TouchableHighlight style={[style.radioBttn]} underlayColor={context.randColor()} activeOpacity={0.6} onPress={() => changeHandler("gender", "male")}>
                   <View style={[style.readioSelectContainer]}>
-                      <View style={[style.radioSelect, gender == "male" && {borderColor: "black", borderWidth: 3}]}></View>
+                      <View style={[style.radioSelect, fields.gender == "male" && {borderColor: "black", borderWidth: 3}]}></View>
                       <Text style={[style.radioText]}>Male</Text>
                   </View>
                 </TouchableHighlight>
 
                 <TouchableHighlight style={[style.radioBttn]} underlayColor={context.randColor()} activeOpacity={0.6} onPress={() => changeHandler("gender", "female")}>
                   <View style={[style.readioSelectContainer]}>
-                      <View style={[style.radioSelect, gender == "female" && {borderColor: "black", borderWidth: 3} ]}></View>
+                      <View style={[style.radioSelect, fields.gender == "female" && {borderColor: "black", borderWidth: 3} ]}></View>
                       <Text style={[style.radioText]}>Female</Text>
                   </View>
                 </TouchableHighlight>

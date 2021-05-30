@@ -25,15 +25,15 @@ let Navbar = (props) => {
        { props.accountState.logged ?
            <View style={[style.navbar]} onPress={ () => Alert.alert(Object.keys(props.location).join(", "))}>
             <Link to="/" style={[style.button]}  underlayColor={context.randColor()}> 
-              <Text style={[style.text, {fontWeight: activeLink[0] ? "bold" : ""},{color: activeLink[0] ? "black" : "gray"}]} >Home</Text>
+              <Text style={[style.text, {fontWeight: activeLink[0] ? "bold" : "normal"},{color: activeLink[0] ? "black" : "gray"}]} >Home</Text>
             </Link>
      
           <Link to="/list" style={[style.button]} underlayColor={context.randColor()}>
-            <Text style={[style.text, {fontWeight: activeLink[1] ? "bold" : ""}, {color: activeLink[1] ? "black" : "gray"}]} >List</Text>
+            <Text style={[style.text, {fontWeight: activeLink[1] ? "bold" : "normal"}, {color: activeLink[1] ? "black" : "gray"}]} >List</Text>
           </Link>
       
           <Link to="/account" style={[style.button, ]}  underlayColor={context.randColor()}>
-            <Text style={[style.text, {fontWeight: activeLink[2] ? "bold" : ""}, {color: activeLink[2] ? "black" : "gray"}]} >Account</Text>
+            <Text style={[style.text, {fontWeight: activeLink[2] ? "bold" : "normal"}, {color: activeLink[2] ? "black" : "gray"}]} >Account</Text>
           </Link>
       
       </View>
