@@ -40,9 +40,12 @@ let Account = ({accountState, accountSetter}) => {
     }) 
 
     if(error) return Alert.alert("all fields must be fillled")
-      
+    
+    let newFields = {...fields}
+    delete newFields.image
+
     accountSetter.accountSet({
-      ...fields
+      ...newFields
     })
     
      Alert.alert("account updated")
